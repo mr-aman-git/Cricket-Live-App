@@ -1,7 +1,9 @@
 import React from 'react'
+import LiveMatches from './LiveMatches'
 
 const Navbar = () => {
   return (
+<>
     <div>
         <div className='w-[100%] flex justify-between h-[100px] items-center bg-[#0f172a]'>
             <div className='md:ml-10 w-25 ml-2 mr-10'>
@@ -34,6 +36,9 @@ const Navbar = () => {
             </div>
         </div>
     </div>
+
+    <LiveMatches />
+ </>
   )
 }
 
