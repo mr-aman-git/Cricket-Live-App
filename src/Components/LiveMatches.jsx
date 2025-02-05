@@ -1,6 +1,24 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 
+let MatchUrl= 'https://api.cricapi.com/v1/cricScore?apikey=ed41540b-edfa-4c13-95a7-f58d0200cecb'
 const LiveMatches = () => {
+let [apidata, setApidata]= useState([]);
+    let Upcomming= async ()=>{
+        try {
+            let res= await axios.get(MatchUrl);
+            setApidata(res.data.data);
+            console.log(apidata);
+            
+            
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
+    useEffect(() => {
+        Upcomming();
+      }, []);
   return (
     <>
     <div className=' flex overflow-auto gap-3'>
