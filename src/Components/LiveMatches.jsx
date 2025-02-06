@@ -4,53 +4,65 @@ import React, { useEffect, useState } from 'react'
 let MatchUrl= 'https://api.cricapi.com/v1/cricScore?apikey=ed41540b-edfa-4c13-95a7-f58d0200cecb'
 const LiveMatches = () => {
 let [apidata, setApidata]= useState([]);
-    let Upcomming= async ()=>{
-        try {
-            let res= await axios.get(MatchUrl);
-            setApidata(res.data.data);
-            console.log(apidata);
-            
-            
-        } catch (error) {
-            console.log(error);
-            
-        }
-    }
+    
     useEffect(() => {
+
+        let Upcomming= async ()=>{
+            try {
+                let res= await axios.get(MatchUrl);
+                let result=(res.data.data);
+                setApidata(result);
+                  
+            } catch (error) {
+                console.log(error);  
+            }
+        }
         Upcomming();
       }, []);
+
+
   return (
     <>
     <div className=' flex overflow-auto gap-3'>
+
+        {
+        apidata ?.map((store)=>
+            
         <div className='flex w-[100vw] justify-center'>
-            <div className='bg-white w-[350px] h-[165px] rounded-md mt-2'>
-                <h3 className='text-center font-medium  text-blue-700 '>Indian Premier League</h3>
-                <p className='text-center text-[14px] '>Arun jaitley Stadium</p>
+            <div className='bg-white w-[350px] h-[180px] rounded-md mt-2' key={store.id}>
+                <h3 className='text-center font-medium  text-blue-700 '> {store.series} </h3>
+                <p className='text-center text-[14px] '> {store.ms} </p>
                         <hr className='text-orange-500' />
                 <div className='flex'>
-                    <div className='w-[180px] p-2'> 
+                    <div className='w-[200px] p-2'> 
                         <div className='flex gap-2'>
-                            <img src="https://g.cricapi.com/iapi/23-637877072894080569.webp?w=48" alt="" className='w-[30px]' />
-                            <h4>England</h4>
+                            <img src= {store.t1img} alt="flag" className='w-[30px] rounded-[50%]' />
+                            <h4 className='text-[14px]'> {store.t1}</h4>
                         </div>
 
                         <div className='flex mt-3 gap-2'>
-                            <img src="https://g.cricapi.com/iapi/31-637877061080567215.webp?w=48" alt="" className='w-[30px]' />
-                            <h4>India</h4>
+                            <img src= {store.t2img} alt="flag" className='w-[30px] rounded-[50%]' />
+                            <h4 className='text-[14px]'>{store.t2}</h4>
                         </div>
                         
                     </div>
 
-                    <div className='w-[170px] p-2'>
-                        <p>Date</p>
-                        <p>ODI</p>
+                    <div className='w-[150px] p-2'>
+                        <p className='text-[14px]'>{store.dateTimeGMT}</p>
+                        <p> {store.matchType} </p>
                     </div>
                 </div>
-                 <p className='text-center text-green-700 font-medium'>CSK won by 5 wickets</p>
+                 <p className='text-center text-green-700 font-medium'> {store.status} </p>
             </div>
-        </div>
 
-    </div>
+            </div>
+
+    
+        )
+      }
+
+      </div>    
+        
     </>
   )
 }
