@@ -12,6 +12,8 @@ const LiveMatches = () => {
         let res = await axios.get(MatchUrl);
         let result = res.data.data;
         setApidata(result);
+        console.log(result);
+        
       } catch (error) {
         console.log(error);
       }
@@ -21,12 +23,15 @@ const LiveMatches = () => {
 
   return (
     <>
-      <div className="w-[100%] bg-amber-200 h-[100vh]">
-        {apidata?.map((store) => (
-          <div>
-
-          </div>
-        ))}
+      <div className="w-[100%] bg-amber-200 ">
+        <div className="flex gap-2 flex-wrap justify-center">
+          {apidata?.map((store) => (
+            <div className="h-[250px] w-[420px] bg-white rounded-lg">
+                <h2 className="text-center font-bold pt-3 pb-2">{store.series}</h2>
+                <hr className="text-gray-400"/>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
