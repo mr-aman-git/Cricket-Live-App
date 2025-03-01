@@ -1,35 +1,41 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
-let MatchUrl= 'https://api.cricapi.com/v1/cricScore?apikey=ed41540b-edfa-4c13-95a7-f58d0200cecb'
+let MatchUrl =
+  "https://api.cricapi.com/v1/cricScore?apikey=ed41540b-edfa-4c13-95a7-f58d0200cecb";
 const LiveMatches = () => {
-let [apidata, setApidata]= useState([]);
-    
-    useEffect(() => {
+  let [apidata, setApidata] = useState([]);
 
-        let Upcomming= async ()=>{
-            try {
-                let res= await axios.get(MatchUrl);
-                let result=(res.data.data);
-                setApidata(result);
-                  
-            } catch (error) {
-                console.log(error);  
-            }
-        }
-        Upcomming();
-      }, []);
-
+  useEffect(() => {
+    let Upcomming = async () => {
+      try {
+        let res = await axios.get(MatchUrl);
+        let result = res.data.data;
+        setApidata(result);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    Upcomming();
+  }, []);
 
   return (
     <>
-    <div className=' flex overflow-auto gap-3'>
+      <div className="w-[100%] bg-amber-200 h-[100vh]">
+        {apidata?.map((store) => (
+          <div>
 
-        {
-        apidata ?.map((store)=>
-            
-        <div className='flex w-[100vw] justify-center'>
-            <div className='bg-white w-[350px] h-[180px] rounded-md mt-2' key={store.id}>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+};
+
+export default LiveMatches;
+
+{
+  /* <div className='bg-white w-[350px] rounded-md mt-2' key={store.id}>
                 <h3 className='text-center font-medium  text-blue-700 '> {store.series} </h3>
                 <p className='text-center text-[14px] '> {store.ms} </p>
                         <hr className='text-orange-500' />
@@ -47,24 +53,11 @@ let [apidata, setApidata]= useState([]);
                         
                     </div>
 
-                    <div className='w-[150px] p-2'>
+                    <div className=' p-2'>
                         <p className='text-[14px]'>{store.dateTimeGMT}</p>
                         <p> {store.matchType} </p>
                     </div>
                 </div>
                  <p className='text-center text-green-700 font-medium'> {store.status} </p>
-            </div>
-
-            </div>
-
-    
-        )
-      }
-
-      </div>    
-        
-    </>
-  )
+            </div> */
 }
-
-export default LiveMatches
