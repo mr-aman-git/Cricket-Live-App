@@ -1,7 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import LiveMatches from './LiveMatches'
 
 const Navbar = () => {
+    let [searchData, setSearchData]= useState();
+
+    let Search= (e)=>{
+        setSearchData(e.target.value.toUpperCase());
+
+    }
+    console.log(searchData);
+    
+    
   return (
 <>
     <div>
@@ -17,7 +26,7 @@ const Navbar = () => {
                 </div>
 
                 <div className='text-white absolute'>
-                    <input type="text" placeholder='Search Cricket Match' className='border-white border-1 outline-none pl-10 h-12 md:w-[30vw] w-[50vw] rounded-md' />
+                    <input type="text" placeholder='Search Cricket Match' className='border-white border-1 outline-none pl-10 h-12 md:w-[30vw] w-[50vw] rounded-md' onChange={Search}/>
                 </div>
 
             </div>
