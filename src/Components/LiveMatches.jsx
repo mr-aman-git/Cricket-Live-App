@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 
 let MatchUrl =
   "https://api.cricapi.com/v1/cricScore?apikey=ed41540b-edfa-4c13-95a7-f58d0200cecb";
-const LiveMatches = () => {
+const LiveMatches = ({setSearchData, searchData}) => {
   let [apidata, setApidata] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     let Upcomming = async () => {
@@ -19,6 +20,13 @@ const LiveMatches = () => {
     };
     Upcomming();
   }, []);
+
+  useEffect(()=>{
+    if (!apidata || !apidata.series) return;
+    let filter= apidata.series.filter((fill)=>fill.series.toUpperCase().includes(searchData));
+    setFilteredData(filter);
+    return filteredData;
+  },[]);
 
   return (
     <>
