@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
 <>
     <div>
-        <div className='w-[100%] flex justify-between h-[100px] items-center bg-[#0f172a]'>
+        <div className='w-[100%] flex justify-between h-[100px] items-center bg-[#0f172a] mb-3'>
             <div className='md:ml-10 w-25 ml-2 mr-10'>
                 <img src="https://www.cricket.com/svgs/cricket.com.svg" alt="" />
             </div>
