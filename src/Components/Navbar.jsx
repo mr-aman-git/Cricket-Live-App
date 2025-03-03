@@ -1,14 +1,21 @@
 import React, { useState } from 'react'
 import LiveMatches from './LiveMatches'
+import useHook from "../CustomHook";
 
 const Navbar = () => {
-    let [searchData, setSearchData]= useState();
+    let {searchData, setSearchData, apidata} = useHook();
 
     let Search= (e)=>{
-        setSearchData(e.target.value.toUpperCase());
+        let result= e.target.value.toUpperCase();
+        if(result == ''){
+            setSearchData(null);
+        }
 
+        let filters= apidata?.filter((crick)=> crick.series.toUpperCase().includes(result))
+        setSearchData(filters);
+        console.log(filters);
+        
     }
-    console.log(searchData);
     
     
   return (

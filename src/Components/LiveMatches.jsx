@@ -7,7 +7,7 @@ let MatchUrl =
   "https://api.cricapi.com/v1/cricScore?apikey=ed41540b-edfa-4c13-95a7-f58d0200cecb";
 const LiveMatches = () => {
   
-let {setApidata, apidata} = useCustomHook();
+let {setApidata, apidata, setSearchData, searchData} = useCustomHook();
 
   useEffect(() => {
     let Upcomming = async () => {
@@ -15,7 +15,7 @@ let {setApidata, apidata} = useCustomHook();
         let res = await axios.get(MatchUrl);
         let result = res.data.data;
         setApidata(result);
-        console.log(result);
+        setSearchData(...result, searchData);
       } catch (error) {
         console.log(error);
       }
@@ -30,7 +30,7 @@ let {setApidata, apidata} = useCustomHook();
       <div className="w-[100%]  ">
         <div className="flex gap-2 flex-wrap justify-center">
           {apidata?.map((store) => (
-            <div className="h-[250px] w-[370px] bg-white rounded-lg shadow-md">
+            <div className="h-[250px] w-[370px] bg-white rounded-lg shadow-md" key={store.id}>
               <h2 className="text-center font-semibold pt-3 pb-2 text-[14px]">
                 {store.series}
               </h2>
