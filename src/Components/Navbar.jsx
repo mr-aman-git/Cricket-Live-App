@@ -46,7 +46,7 @@ const Navbar = () => {
         </div>
     </div>
 
-    <LiveMatches searchData={searchData} setSearchData={setSearchData} />
+    <LiveMatches />
  </>
   )
 }
