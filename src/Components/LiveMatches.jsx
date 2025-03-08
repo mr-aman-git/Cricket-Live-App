@@ -1,12 +1,19 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import useCustomHook from "../CustomHook";
+import.meta.env;
+
+const apiKey = import.meta.env.VITE_CRICAPI_KEY;
+const MatchUrl = `https://api.cricapi.com/v1/cricScore?apikey=${apiKey}`;
+
+console.log("API Key:", apiKey); // Check karne ke liye
+console.log("API Key:", import.meta.env.VITE_CRICAPI_KEY);
 
 
-let MatchUrl =
-  "https://api.cricapi.com/v1/cricScore?apikey=ed41540b-edfa-4c13-95a7-f58d0200cecb";
+// let MatchUrl =
+//   "https://api.cricapi.com/v1/cricScore?apikey=ed41540b-edfa-4c13-95a7-f58d0200cecb";
 
-  
+
 const LiveMatches = () => {
   
 let {setApidata, apidata, setSearchData, searchData, loading, setLoading} = useCustomHook();

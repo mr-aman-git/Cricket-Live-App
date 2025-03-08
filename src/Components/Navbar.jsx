@@ -4,9 +4,6 @@ import useCustom from "../CustomHook";
 
 const Navbar = () => {
     let {searchData, setSearchData, setApidata, apidata} = useCustom();
-    useEffect(() => {
-        console.log("Updated apidata:", apidata);
-    }, []);
     
     
 
@@ -23,7 +20,6 @@ let Search = (e) => {
     );
 
     setSearchData(filters || []); // agar filters undefined ho, toh empty array set karo
-    console.log(filters);
 };
 
     
