@@ -1,22 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import LiveMatches from './LiveMatches'
-import useHook from "../CustomHook";
+import useCustom from "../CustomHook";
 
 const Navbar = () => {
-    let {searchData, setSearchData, apidata} = useHook();
-
-    let Search= (e)=>{
-        let result= e.target.value.toUpperCase();
-        if(result == ''){
-            setSearchData(null);
-        }
-
-        let filters= apidata?.filter((crick)=> crick.series.toUpperCase().includes(result))
-        setSearchData(filters);
-        console.log(filters);
-        
-    }
+    let {searchData, setSearchData, setApidata, apidata} = useCustom();
+    useEffect(() => {
+        console.log("Updated apidata:", apidata);
+    }, [apidata]);
     
+    
+
+let Search = (e) => {
+    let results = e.target.value.trim().toUpperCase();
+
+    if (results === '') {
+        setSearchData([]);  // null ke bajay empty array rakho
+        return; // yahan return kar do taake neeche filter apply na ho
+    }
+
+    let filters = apidata?.filter((crick) => 
+        crick.series?.toUpperCase().includes(results) // series exist karti hai ya nahi, check karna zaroori hai
+    );
+
+    setSearchData(filters || []); // agar filters undefined ho, toh empty array set karo
+    console.log(filters);
+};
+
     
   return (
 <>
@@ -29,7 +38,7 @@ const Navbar = () => {
             <div className='flex relative h-12 md:w-[370px] w-[200px]'>
 
                 <div className='text-white pt-[6px] ml-1.5'>
-                    <i class="ri-search-eye-line text-[25px] "></i>
+                    <i className="ri-search-eye-line text-[25px] "></i>
                 </div>
 
                 <div className='text-white absolute'>

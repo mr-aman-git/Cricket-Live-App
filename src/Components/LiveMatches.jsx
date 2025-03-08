@@ -16,6 +16,7 @@ let {setApidata, apidata, setSearchData, searchData} = useCustomHook();
         let result = res.data.data;
         setApidata(result);
         setSearchData(...result, searchData);
+        
       } catch (error) {
         console.log(error);
       }
