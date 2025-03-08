@@ -5,9 +5,11 @@ import useCustomHook from "../CustomHook";
 
 let MatchUrl =
   "https://api.cricapi.com/v1/cricScore?apikey=ed41540b-edfa-4c13-95a7-f58d0200cecb";
+
+  
 const LiveMatches = () => {
   
-let {setApidata, apidata, setSearchData, searchData} = useCustomHook();
+let {setApidata, apidata, setSearchData, searchData, loading, setLoading} = useCustomHook();
 
   useEffect(() => {
     let Upcomming = async () => {
@@ -16,7 +18,7 @@ let {setApidata, apidata, setSearchData, searchData} = useCustomHook();
         let result = res.data.data;
         setApidata(result);
         setSearchData(...result, searchData);
-        
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -24,7 +26,9 @@ let {setApidata, apidata, setSearchData, searchData} = useCustomHook();
     Upcomming();
   }, []);
 
-  
+  if(loading) return(<div 
+    className="flex justify-center align-middle text-blue-500 text-2xl font-semibold mt-[20%]">
+    <p> Loading....</p></div>);
 
   return (
     <>

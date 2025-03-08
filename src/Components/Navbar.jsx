@@ -6,7 +6,7 @@ const Navbar = () => {
     let {searchData, setSearchData, setApidata, apidata} = useCustom();
     useEffect(() => {
         console.log("Updated apidata:", apidata);
-    }, [apidata]);
+    }, []);
     
     
 
