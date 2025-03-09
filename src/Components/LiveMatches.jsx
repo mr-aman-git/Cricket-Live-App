@@ -1,49 +1,27 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import useCustomHook from "../CustomHook";
-import.meta.env;
 import ClipLoader from "react-spinners/ClipLoader";
 
-const apiKey = import.meta.env.VITE_CRICAPI_KEY;
-const MatchUrl = `https://api.cricapi.com/v1/cricScore?apikey=${apiKey}`;
-
-console.log("API Key:", apiKey); // Check karne ke liye
-console.log("API Key:", import.meta.env.VITE_CRICAPI_KEY);
-
-
-// let MatchUrl =
-//   "https://api.cricapi.com/v1/cricScore?apikey=ed41540b-edfa-4c13-95a7-f58d0200cecb";
-
-
 const LiveMatches = () => {
-  
-let {setApidata, apidata, setSearchData, searchData, loading, setLoading} = useCustomHook();
+  let { apidata, loading, } =
+    useCustomHook();
 
-  useEffect(() => {
-    let Upcomming = async () => {
-      try {
-        let res = await axios.get(MatchUrl);
-        let result = res.data.data;
-        setApidata(result);
-        setSearchData(...result, searchData);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    Upcomming();
-  }, []);
-
-  if(loading) return(<div 
-    className="flex justify-center align-middle text-blue-500 text-2xl font-semibold mt-[20%]">
-    <ClipLoader color="blue" size={50} /></div>);
+  if (loading)
+    return (
+      <div className="flex justify-center align-middle text-blue-500 text-2xl font-semibold mt-[20%]">
+        <ClipLoader color="blue" size={50} />
+      </div>
+    );
 
   return (
     <>
       <div className="w-[100%]  ">
         <div className="flex gap-2 flex-wrap justify-center">
           {apidata?.map((store) => (
-            <div className="h-[250px] w-[370px] bg-white rounded-lg shadow-md" key={store.id}>
+            <div
+              className="h-[250px] w-[370px] bg-white rounded-lg shadow-md"
+              key={store.id}
+            >
               <h2 className="text-center font-semibold pt-3 pb-2 text-[14px]">
                 {store.series}
               </h2>
@@ -105,5 +83,3 @@ let {setApidata, apidata, setSearchData, searchData, loading, setLoading} = useC
 };
 
 export default LiveMatches;
-
-
