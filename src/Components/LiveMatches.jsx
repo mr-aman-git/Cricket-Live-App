@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import useCustomHook from "../CustomHook";
 import.meta.env;
+import ClipLoader from "react-spinners/ClipLoader";
 
 const apiKey = import.meta.env.VITE_CRICAPI_KEY;
 const MatchUrl = `https://api.cricapi.com/v1/cricScore?apikey=${apiKey}`;
@@ -35,7 +36,7 @@ let {setApidata, apidata, setSearchData, searchData, loading, setLoading} = useC
 
   if(loading) return(<div 
     className="flex justify-center align-middle text-blue-500 text-2xl font-semibold mt-[20%]">
-    <p> Loading....</p></div>);
+    <ClipLoader color="blue" size={50} /></div>);
 
   return (
     <>
